@@ -9,8 +9,7 @@
 #import "ImageViewController.h"
 #import "URLViewController.h"
 
-@interface ImageViewController () <UIScrollViewDelegate,
-                                   UIPopoverPresentationControllerDelegate>
+@interface ImageViewController () <UIScrollViewDelegate>
 
 @property (nonatomic, strong) UIImageView *imageView;
 @property (nonatomic, strong) UIImage *image;
@@ -106,13 +105,7 @@
     if ([segue.destinationViewController isKindOfClass:[URLViewController class]]) {
         URLViewController *urlvc = (URLViewController *)segue.destinationViewController;
             urlvc.url = self.imageURL;
-        
-        if (urlvc.popoverPresentationController) {
-            UIPopoverPresentationController *ppc = urlvc.popoverPresentationController;
-            
-            ppc.delegate = self;
-        }
-    }
+     }
 }
 
 // не показывайте URL, если imageURL равно nil
@@ -167,12 +160,6 @@
         }];
         [task resume]; // don't forget that all NSURLSession tasks start out suspended!
     }
-}
-
-- (UIModalPresentationStyle)adaptivePresentationStyleForPresentationController:(UIPresentationController *)controller
-                                                               traitCollection:(UITraitCollection *)traitCollection
-{
-    return UIModalPresentationNone;
 }
 
 @end

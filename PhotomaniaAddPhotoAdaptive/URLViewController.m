@@ -8,11 +8,22 @@
 
 #import "URLViewController.h"
 
-@interface URLViewController ()
+@interface URLViewController ()<UIPopoverPresentationControllerDelegate>
+
 @property (weak, nonatomic) IBOutlet UITextView *urlTextView;
+
 @end
 
 @implementation URLViewController
+
+
+-(void)awakeFromNib {
+    [super awakeFromNib];
+    
+    self.modalPresentationStyle = UIModalPresentationPopover;
+    self.popoverPresentationController.delegate = self;
+    
+}
 
 - (void)setUrl:(NSURL *)url
 {
@@ -42,5 +53,12 @@
             return super.preferredContentSize;
         }
 }
+
+- (UIModalPresentationStyle)adaptivePresentationStyleForPresentationController:(UIPresentationController *)controller
+                                                               traitCollection:(UITraitCollection *)traitCollection
+{
+    return UIModalPresentationNone;
+}
+
 
 @end
